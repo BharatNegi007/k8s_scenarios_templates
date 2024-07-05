@@ -1,0 +1,31 @@
+# That Pod should be required to be only scheduled on Nodes where no Pods 
+# with label "level=restricted" are running. 
+# For the topologyKey use kubernetes.io/hostname.
+# There are no taints on any Nodes which means no tolerations are needed.
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp
+  labels:
+    name: myapp
+spec:
+  containers:
+  - name: myapp
+    image: nginx:alpine
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: 80
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+          - key: level
+            operator: In
+            values:
+            - restricted
+        topologyKey: kubernetes.io/hostname      

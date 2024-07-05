@@ -1,0 +1,22 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+namespace: ns1
+metadata:
+  name: ns1-clusterrole
+rules:
+- apiGroups: [""]
+  resources: ["pods", "services", "deployments"]
+  verbs: ["get", "list", "watch", "create", "update", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+namespace: ns2
+metadata:
+  name: ns1-clusterrole
+rules:
+- apiGroups: [""]
+  resources: ["pods", "services", "deployments"]
+  verbs: ["get", "list", "watch", "create", "update", "delete"]
+---
+
+clusterrole

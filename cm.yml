@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: trauerweide
+  labels:
+    app: myapplication
+data:
+    tree: trauerweide
+ 

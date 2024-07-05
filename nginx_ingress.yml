@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: world
+  namespace: world
+  labels:
+    name: myingress
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: "world.universe.mine"
+    http:
+      paths:
+      - pathType: Prefix
+        path: /asia
+        backend:
+          service:
+            name: asia
+            port: 
+              number: 80
+      - pathType: Prefix
+        path: /europe
+        backend:
+          service:
+            name: europe
+            port: 
+              number: 80
