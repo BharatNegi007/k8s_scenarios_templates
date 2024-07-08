@@ -1,0 +1,27 @@
+In Kubernetes, taints and tolerations work together to ensure that pods are only scheduled onto appropriate nodes. Taints are applied to nodes, while tolerations are applied to pods. This mechanism allows you to control which pods can run on which nodes.
+Taints
+A taint is applied to a node to mark it as having a special property that might prevent certain pods from being scheduled there. When a node has a taint, Kubernetes will not schedule any pods onto that node unless the pod has a matching toleration.
+
+
+A taint has three parts:
+
+Key: A string identifier for the taint.
+Value: An optional string value for the taint.
+Effect: Specifies the action to take when a pod does not tolerate the taint. Possible effects are:
+NoSchedule: Pods that do not tolerate the taint will not be scheduled on the node.
+PreferNoSchedule: Kubernetes will avoid scheduling pods that do not tolerate the taint on the node, but it is not a strict requirement.
+NoExecute: Pods that do not tolerate the taint will be evicted if they are already running on the node.
+
+Tolerations
+A toleration is applied to a pod to indicate that the pod can be scheduled on nodes with matching taints.
+
+A toleration has the following parts:
+
+Key: The key of the taint to tolerate.
+Value: The value of the taint to tolerate.
+Effect: The effect of the taint to tolerate (NoSchedule, PreferNoSchedule, or NoExecute).
+Operator: Defines how the key and value are compared. Possible operators are Equal and Exists.
+
+Run the command to list the taints applied to node01.
+# list the Taints applied to node01
+k desribe no node01 | grep Taints

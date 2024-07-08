@@ -1,0 +1,22 @@
+# Describe nodes
+k get nodes or k get no 
+
+# list the Taints applied to node01
+k desribe no node01 | grep Taints
+
+# Apply the tolerations to the pod
+
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: nginx
+  name: nginx
+spec:
+  tolerations:
+  - key: "dedicated"
+    value: "special-user"
+    effect: "NoSchedule"
+  containers:
+  - image: nginx
+    name: nginx
